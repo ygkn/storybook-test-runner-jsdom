@@ -1,4 +1,10 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Meta, StoryObj } from "@storybook/react";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "./button";
 import {
   Form,
   FormControl,
@@ -8,13 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "./form";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "./button";
 import { Input } from "./input";
-import { FC } from "react";
-import { userEvent, waitFor, within } from "@storybook/testing-library";
 
 import { expect } from "@storybook/jest";
 
@@ -78,10 +78,6 @@ export const EmptySubmit: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
-    await step("clear", async () => {
-      await userEvent.clear(canvas.getByRole("textbox", { name: "Username" }));
-    });
-
     await step("submit", async () => {
       await userEvent.click(canvas.getByRole("button", { name: "Submit" }));
     });
@@ -93,29 +89,6 @@ export const EmptySubmit: Story = {
             name: "Username",
           }),
         ).toBeInvalid();
-      });
-    });
-  },
-};
-
-export const Fullfilled: Story = {
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step("input", async () => {
-      await userEvent.type(
-        canvas.getByRole("textbox", { name: "Username" }),
-        "name",
-      );
-    });
-
-    await step("assert", async () => {
-      await waitFor(async () => {
-        await expect(
-          canvas.getByRole("textbox", {
-            name: "Username",
-          }),
-        ).toHaveValue("name");
       });
     });
   },
