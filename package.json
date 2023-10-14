@@ -45,13 +45,17 @@
     "@storybook/react": "^7.2.1",
     "@storybook/testing-library": "^0.2.0",
     "@storybook/testing-react": "^2.0.1",
-    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
+    "@vitejs/plugin-react": "^4.1.0",
     "eslint-config-prettier": "^8.10.0",
     "eslint-plugin-storybook": "^0.6.13",
     "glob": "^10.3.3",
+    "jsdom": "^22.1.0",
     "prettier": "^3.0.1",
     "react-hook-form": "^7.45.4",
-    "storybook": "^7.2.1"
+    "storybook": "^7.2.1",
+    "vite-tsconfig-paths": "^4.2.1",
+    "vitest": "^0.34.6"
   }
 }
