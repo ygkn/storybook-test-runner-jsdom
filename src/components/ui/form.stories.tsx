@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Meta, StoryObj } from "@storybook/react";
+import { expect, fn } from "@storybook/test";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -15,8 +16,6 @@ import {
   FormMessage,
 } from "./form";
 import { Input } from "./input";
-
-import { expect } from "@storybook/jest";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -61,10 +60,8 @@ const ExampleForm: FC<{
 
 const meta = {
   component: ExampleForm,
-  argTypes: {
-    onSubmit: {
-      type: "function",
-    },
+  args: {
+    onSubmit: fn(),
   },
 } satisfies Meta<typeof ExampleForm>;
 

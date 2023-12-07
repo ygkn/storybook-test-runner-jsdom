@@ -11,12 +11,15 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["src/test/setup.ts"],
   },
-  resolve: {
-    alias: [
-      {
-        find: "@storybook/jest",
-        replacement: "vitest",
-      },
-    ],
-  },
+  // Storybook 7.6 未満または Storybook 7.6 以上で action の定義に `@storybook/test` の `fn()` を使用していない場合は、
+  // 以下のコメントアウトを外してください。
+  //
+  // resolve: {
+  //   alias: [
+  //     {
+  //       find: "@storybook/jest",
+  //       replacement: "vitest",
+  //     },
+  //   ],
+  // },
 });
