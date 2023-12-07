@@ -1,26 +1,22 @@
-import { glob } from "glob";
-import { ReactRenderer, composeStories } from "@storybook/react";
+/// <reference types="vite/client" />
+
+import { Meta, StoryFn, composeStories } from "@storybook/react";
 import { render } from "@testing-library/react";
 import { describe, test } from "vitest";
-import type { ComposedStoryFn } from "@storybook/types";
 
 const stories = await Promise.all(
-  (
-    await glob("../**/*.stories.tsx", {
-      cwd: __dirname,
-    })
-  ).map(async (path) => {
-    const exports = await import(path);
+  Object.entries(
+    import.meta.glob<{
+      default: Meta;
+      [name: string]: StoryFn | Meta;
+    }>("../**/*.(stories|story).@(js|jsx|mjs|ts|tsx)", {
+      eager: true,
+    }),
+  ).map(async ([path, exports]) => {
     const composedStories = composeStories(exports);
-
     return {
       path: path.replace(/^\.\.\//, "src/"),
-      stories: Object.entries(composedStories).map(([name, composedStory]) => {
-        const Component = composedStory as ComposedStoryFn<
-          ReactRenderer,
-          unknown
-        >;
-
+      stories: Object.entries(composedStories).map(([name, Component]) => {
         const runStory = async () => {
           // Storybook 7.6 未満または Storybook 7.6 以上で action の定義に `@storybook/test` の `fn()` を使用していない場合は、
           // `argTypes` か `actions` を定義し、以下のコードを使用してください。
