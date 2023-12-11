@@ -41,7 +41,7 @@ const stories = await Promise.all(
 
           const screen = render(<Component />);
 
-          await Component.play?.({ canvasElement: screen.container });
+          await Component.play({ canvasElement: screen.container });
         };
 
         return {
