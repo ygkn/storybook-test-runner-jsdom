@@ -37,6 +37,7 @@ const stories = await Promise.all(
           //     .map(([name]) => [name, vitest.fn()]),
           // );
           // const screen = render(<Component {...args} />);
+          // await Component.play?.({ canvasElement: screen.container, args });
 
           const screen = render(<Component />);
 
